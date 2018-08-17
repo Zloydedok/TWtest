@@ -71,5 +71,15 @@ public abstract class Init {
         String CurrentUser = driver.findElement(By.xpath("//a[contains(text(),'Gerardo Valero')]")).getText();
         Assert.assertEquals(CurrentUser, ExpUser);
     }
+    public void TWLogout() {
+        waiter("//a[@id='user-dropdown-toggle']", 3);
+        driver.findElement(By.xpath("//a[@id='user-dropdown-toggle']")).click();
+        driver.findElement(By.xpath("//button[@class='dropdown-link'][contains(text(),'Log out')]")).click();
+    }
+    public void TWLogOutCheck() {
+        driver.get("https://twitter.com/?lang=en");
+        driver.findElement(By.xpath("//a[contains(text(),'Sign Up')]"));
+    }
+
 
 }
