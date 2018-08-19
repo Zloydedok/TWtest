@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
 
 public abstract class Init {
-
+    String AccPass = "Aftershock1";
     String driverPath = "drivers/";
     public WebDriver driver;
     String ExpUser = "Gerardo Valero";  //Ожидаемое имя пользователя
@@ -70,6 +70,25 @@ public abstract class Init {
         waiter("//a[contains(text(),'Gerardo Valero')]", 5);
         String CurrentUser = driver.findElement(By.xpath("//a[contains(text(),'Gerardo Valero')]")).getText();
         Assert.assertEquals(CurrentUser, ExpUser);
+    }
+    public void TWLogout() {
+        driver.get("https://twitter.com/logout");
+        waiter("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']",5);
+        driver.findElement(By.xpath("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']")).click();
+        waiter("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']",5);
+        driver.findElement(By.xpath("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']")).click();
+        waiter("//a[contains(text(),'Sign Up')]",5);
+        driver.findElement(By.xpath("//a[contains(text(),'Sign Up')]"));
+    }
+    public void TWcurrentCountryNormal() {
+        driver.get("https://twitter.com/settings/account");
+        driver.findElement(By.xpath("//select[@id='user_country']")).click();
+        driver.findElement(By.xpath("//option[@value='cg']")).click();
+        driver.findElement(By.xpath("//button[@id='settings_save']")).click();
+        waiter("//button[@id='confirm_dialog_submit_button']", 5);
+        driver.findElement(By.xpath("//button[@id='confirm_dialog_submit_button']")).click();
+        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(AccPass);
+        driver.findElement(By.xpath("//button[@id='save_password']")).click();
     }
 
 }
