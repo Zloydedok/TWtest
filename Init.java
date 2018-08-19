@@ -90,5 +90,15 @@ public abstract class Init {
         driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(AccPass);
         driver.findElement(By.xpath("//button[@id='save_password']")).click();
     }
-
+    public void TWcurrentLocatioDefault() {
+        driver.get("https://twitter.com/?lang=en");
+        waiter("//span[text()='Change']",10);
+        driver.findElement(By.xpath("//span[text()='Change']")).click();
+        waiter("//button[@class='btn-link js-show-dropdown-select']", 5);
+        driver.findElement(By.xpath("//button[@class='btn-link js-show-dropdown-select']")).click();
+        waiter("//select[@name='regions']", 5);
+        driver.findElement(By.xpath("//select[@name='regions']")).click();
+        waiter("//select[@class='t1-select']/option[@value = '23424787']", 5);
+        driver.findElement(By.xpath("//select[@class='t1-select']/option[@value = '23424787']")).click();
+    }
 }

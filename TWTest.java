@@ -68,4 +68,18 @@ public class TWTest extends Init {
         driver.findElement(By.xpath("//span[contains(text(),'Thanks. Twitter will use this to make your experience better.')]"));
         TWLogout();
     }
+    @Test
+    public void TWtrendsCheck() {
+        TWlogin();
+        waiter("//span[text()='Change']",10);
+        driver.findElement(By.xpath("//span[text()='Change']")).click();
+        waiter("//button[@class='btn-link js-show-dropdown-select']", 5);
+        driver.findElement(By.xpath("//button[@class='btn-link js-show-dropdown-select']")).click();
+        waiter("//select[@name='regions']", 5);
+        driver.findElement(By.xpath("//select[@name='regions']")).click();
+        waiter("//select[@class='t1-select']/option[@value = '23424740']", 5);
+        driver.findElement(By.xpath("//select[@class='t1-select']/option[@value = '23424740']")).click();
+        TWcurrentLocatioDefault();
+        TWLogout();
+    }
 }
