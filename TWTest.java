@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.support.ui.Sleeper;
 import org.testng.Assert;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 
@@ -84,9 +85,7 @@ public class TWTest extends Init {
         waiter("//button[@class='btn-link js-show-dropdown-select']", 5);
         driver.findElement(By.xpath("//button[@class='btn-link js-show-dropdown-select']")).click();
         waiter("//select[@name='regions']", 5);
-        driver.findElement(By.xpath("//select[@name='regions']")).click();
-        waiter("//select[@class='t1-select']/option[@value = '23424740']", 5);
-        driver.findElement(By.xpath("//select[@class='t1-select']/option[@value = '23424740']")).click();
+        new Select(driver.findElement(By.xpath("//select[@class='t1-select']"))).selectByValue("23424765"); //Меняем на Беларусь
         TWcurrentLocatioDefault();
         TWLogout();
     }
