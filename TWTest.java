@@ -7,25 +7,29 @@ import org.testng.annotations.Test;
 
 public class TWTest extends Init {
     String ExpUser = "Gerardo Valero";
-
+    String username = "Xenus1993@mail.ru" ;
+    String userPW = "Aftershock1";
 
     @Test
+    //Проверка возможности логина и логаута
     public void TWLogInOutFunction() {
-        TWlogin();
+        TWlogin(username,userPW);
         TWLogout();
     }
 
     @Test
+    //Проверка возможности поста твитов, проверка их отоброжнния (p.s. запускать с осторожностью, могут забанить)
     public void TWpost() {
-        TWlogin();
+        TWlogin(username,userPW);
         driver.findElement(By.xpath("//div[@name='tweet']")).sendKeys("What a lovely day!");
         driver.findElement(By.xpath("//span[@class='button-text tweeting-text']")).click();
         driver.findElement(By.xpath("//p[text()='What a lovely day!']"));
         TWLogout();
     }
     @Test
+    //Возможность фолловить канал (в данном случае первый попавшийся в списке) и убирать фоллоу
     public void TWfollow() {
-        TWlogin();
+        TWlogin(username,userPW);
         driver.findElement(By.xpath("//a[@href='/LuisGerardoMorw/following']")).click();
         waiter("//img[@class='ProfileCard-avatarImage js-action-profile-avatar']", 5);
         waiter("//button/span[text()='Following']", 5);
@@ -35,8 +39,9 @@ public class TWTest extends Init {
         TWLogout();
     }
     @Test
+    //Возможность получить ожидаемый результат по поиску
     public void TWsearch() {
-        TWlogin();
+        TWlogin(username,userPW);
         driver.findElement(By.xpath("//input[@class='search-input']")).sendKeys("Donald J. Trump");
         driver.findElement(By.xpath("//span[@class='search-icon js-search-action']")).click();
         waiter("//div[@class='stream-item-header']/a[@href='/realDonaldTrump']", 5);
@@ -44,23 +49,25 @@ public class TWTest extends Init {
         TWLogout();
     }
     @Test
+    // Возможность изменить настройки аккаунта с дополнительным подтверждением безопасности
     public void TWAccountSettingChange() {
-        TWlogin();
+        TWlogin(username,userPW);
         driver.get("https://twitter.com/settings/account");
         driver.findElement(By.xpath("//select[@id='user_country']")).click();
         driver.findElement(By.xpath("//option[@value='cu']")).click();
         driver.findElement(By.xpath("//button[@id='settings_save']")).click();
         waiter("//button[@id='confirm_dialog_submit_button']", 5);
         driver.findElement(By.xpath("//button[@id='confirm_dialog_submit_button']")).click();
-        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(AccPass);
+        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(userPW);
         driver.findElement(By.xpath("//button[@id='save_password']")).click();
         TWcurrentCountryNormal();
         driver.get("https://twitter.com/?lang=en");
         TWLogout();
     }
     @Test
+    // Возможность отказа от специфических новостей (первый в списке, твиттер будет сам постоянно предлагать новые)
     public void TWnotificationPreferenceChange() {
-        TWlogin();
+        TWlogin(username,userPW);
         driver.get("https://twitter.com/i/notifications");
         driver.findElement(By.xpath("//div[@class='dropdown']")).click();
         driver.findElement(By.xpath("//button[@class='ActivityItem-dismissOption dropdown-link']")).click();
@@ -69,8 +76,9 @@ public class TWTest extends Init {
         TWLogout();
     }
     @Test
+    // Изменение трендов и возврат их к изначальному значению
     public void TWtrendsCheck() {
-        TWlogin();
+        TWlogin(username,userPW);
         waiter("//span[text()='Change']",10);
         driver.findElement(By.xpath("//span[text()='Change']")).click();
         waiter("//button[@class='btn-link js-show-dropdown-select']", 5);

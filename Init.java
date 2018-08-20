@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.NoSuchElementException;
 
 public abstract class Init {
-    String AccPass = "Aftershock1";
+    String userPW = "Aftershock1";
     String driverPath = "drivers/";
     public WebDriver driver;
     String ExpUser = "Gerardo Valero";  //Ожидаемое имя пользователя
@@ -62,16 +62,18 @@ public abstract class Init {
         }
     }
 
-    public void TWlogin() {
+    public void TWlogin(String twitterUser, String twitterPw) {
+        //Логинимся и проверяем что зашли под нужным юзером
         driver.get("https://twitter.com/?lang=en");
-        driver.findElement(By.xpath("//input[@name='session[username_or_email]']")).sendKeys("Xenus1993@mail.ru");
-        driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys("Aftershock1");
+        driver.findElement(By.xpath("//input[@name='session[username_or_email]']")).sendKeys(twitterUser);
+        driver.findElement(By.xpath("//input[@placeholder='Password']")).sendKeys(twitterPw);
         driver.findElement(By.xpath("//input[@value='Log in']")).click();
         waiter("//a[contains(text(),'Gerardo Valero')]", 5);
         String CurrentUser = driver.findElement(By.xpath("//a[contains(text(),'Gerardo Valero')]")).getText();
         Assert.assertEquals(CurrentUser, ExpUser);
     }
     public void TWLogout() {
+        //Выходим по url (т.к. из разных частей сайта может быть разный путь выхода), проверяем что точно вышли (появилась надпись зайти))
         driver.get("https://twitter.com/logout");
         waiter("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']",5);
         driver.findElement(By.xpath("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']")).click();
@@ -81,16 +83,18 @@ public abstract class Init {
         driver.findElement(By.xpath("//a[contains(text(),'Sign Up')]"));
     }
     public void TWcurrentCountryNormal() {
+        //Возвращает страну по умолчанию
         driver.get("https://twitter.com/settings/account");
         driver.findElement(By.xpath("//select[@id='user_country']")).click();
         driver.findElement(By.xpath("//option[@value='cg']")).click();
         driver.findElement(By.xpath("//button[@id='settings_save']")).click();
         waiter("//button[@id='confirm_dialog_submit_button']", 5);
         driver.findElement(By.xpath("//button[@id='confirm_dialog_submit_button']")).click();
-        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(AccPass);
+        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(userPW);
         driver.findElement(By.xpath("//button[@id='save_password']")).click();
     }
     public void TWcurrentLocatioDefault() {
+        //Изменяет тренды по умолчанию
         driver.get("https://twitter.com/?lang=en");
         waiter("//span[text()='Change']",10);
         driver.findElement(By.xpath("//span[text()='Change']")).click();
