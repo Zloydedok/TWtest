@@ -74,14 +74,14 @@ public abstract class Init {
         Assert.assertEquals(CurrentUser, ExpUser);
     }
     public void TWLogout() {
-        //Выходим по url (т.к. из разных частей сайта может быть разный путь выхода), проверяем что точно вышли (появилась надпись зайти))
+        //Выходим по url (т.к. из разных частей сайта может быть разный путь выхода),
         driver.get("https://twitter.com/logout");
         waiter("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']",5);
         driver.findElement(By.xpath("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']")).click();
         waiter("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']",5);
         driver.findElement(By.xpath("//button[@class='EdgeButton EdgeButton--primary js-submit'][text()='Log out']")).click();
         waiter("//a[contains(text(),'Sign Up')]",5);
-        driver.findElement(By.xpath("//a[contains(text(),'Sign Up')]"));
+        driver.findElement(By.xpath("//a[contains(text(),'Sign Up')]")); //Проверяем что точно вышли (появилась надпись зайти))
     }
     public void TWcurrentCountryNormal() {
         //Возвращает страну по умолчанию
@@ -91,7 +91,7 @@ public abstract class Init {
         driver.findElement(By.xpath("//button[@id='settings_save']")).click();
         waiter("//button[@id='confirm_dialog_submit_button']", 5);
         driver.findElement(By.xpath("//button[@id='confirm_dialog_submit_button']")).click();
-        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(userPW);
+        driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(userPW); //требует подтверждения паролем
         driver.findElement(By.xpath("//button[@id='save_password']")).click();
     }
     public void TWcurrentLocatioDefault() {
@@ -102,6 +102,6 @@ public abstract class Init {
         waiter("//button[@class='btn-link js-show-dropdown-select']", 5);
         driver.findElement(By.xpath("//button[@class='btn-link js-show-dropdown-select']")).click();
         waiter("//select[@name='regions']", 5);
-        new Select(driver.findElement(By.xpath("//select[@class='t1-select']"))).selectByValue("23424801"); //Мы живем в Эквадоре
+        new Select(driver.findElement(By.xpath("//select[@class='t1-select']"))).selectByValue("23424801"); // По умолчанию мы живем в Эквадоре
     }
 }

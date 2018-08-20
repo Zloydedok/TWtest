@@ -62,7 +62,6 @@ public class TWTest extends Init {
         driver.findElement(By.xpath("//input[@id='auth_password']")).sendKeys(userPW);
         driver.findElement(By.xpath("//button[@id='save_password']")).click();
         TWcurrentCountryNormal();
-        driver.get("https://twitter.com/?lang=en");
         TWLogout();
     }
     @Test
